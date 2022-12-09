@@ -1,11 +1,9 @@
-import { Link, Text } from '@chakra-ui/react';
 import { U32Value, ContractFunction } from '@elrondnetwork/erdjs';
 import { useScTransaction } from '../../hooks/core/useScTransaction';
 import { useCallback } from 'react';
 import { ActionButton } from '../tools/ActionButton';
 import { networkConfig, chainType } from '../../config/network';
 import { shortenHash } from '../../utils/shortenHash';
-import { FlexCardWrapper } from '../ui/CardWrapper';
 import { TransactionCb } from '../../hooks/core/common-helpers/sendTxOperations';
 
 const mintSmartContractAddress =
@@ -32,22 +30,22 @@ export const SimpleNftMintDemo = ({
   }, [triggerTx]);
 
   return (
-    <FlexCardWrapper>
-      <Text mb={4}>
+    <div className="p-6 rounded-xl bg-dark-darker flex-1 flex flex-col text-center items-center justify-center">
+      <p className="mb-4">
         2. You will be minting one NFT using{' '}
         <a href="https://www.elven.tools">Elven Tools</a> smart contract: <br />
-        <Link
+        <a
           href={`${networkConfig[chainType].explorerAddress}/accounts/${mintSmartContractAddress}`}
-          fontWeight="bold"
+          className="font-bold"
         >
           {shortenHash(mintSmartContractAddress, 8)}
-        </Link>{' '}
+        </a>{' '}
         <br />
         (devnet, max 10 NFTs per address)
-      </Text>
+      </p>
       <ActionButton disabled={pending} onClick={handleSendTx}>
-        <Text>Mint</Text>
+        Mint
       </ActionButton>
-    </FlexCardWrapper>
+    </div>
   );
 };

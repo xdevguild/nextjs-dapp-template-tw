@@ -1,27 +1,13 @@
-import NextLink from 'next/link';
-import { Box, Text } from '@chakra-ui/react';
+import Link from 'next/link';
 
 export const Logo = () => {
   return (
-    <NextLink href="/">
-      <Box
-        display="flex"
-        alignItems="center"
-        gap={2}
-        position="relative"
-        userSelect="none"
-      >
-        <Text
-          as="span"
-          cursor="pointer"
-          mb={0}
-          fontSize="4xl"
-          fontWeight="black"
-          color="dappTemplate.white"
-        >
+    <Link href="/">
+      <div className="flex items-center gap-2 relative select-none">
+        <span className="text-4xl font-black text-white">
           MultiversX Dapp Template
-        </Text>
-      </Box>
-    </NextLink>
+        </span>
+      </div>
+    </Link>
   );
 };

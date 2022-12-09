@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/react';
 import { FC } from 'react';
 import { SocialMediaIcons } from './SocialMediaIcons';
 import { LoginModalButton } from '../tools/LoginModalButton';
@@ -9,18 +8,9 @@ interface HeaderMenuButtonsProps {
 
 export const HeaderMenuButtons: FC<HeaderMenuButtonsProps> = ({ enabled }) => {
   return (
-    <Box
-      display="flex"
-      gap={5}
-      alignItems="center"
-      sx={{
-        '@media screen and (max-width: 515px)': {
-          flexDirection: 'column',
-        },
-      }}
-    >
+    <div className="flex gap-5 items-center flex-col sm:flex-row">
       <SocialMediaIcons />
       {enabled.includes('auth') && <LoginModalButton />}
-    </Box>
+    </div>
   );
 };

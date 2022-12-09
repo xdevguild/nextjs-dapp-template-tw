@@ -1,33 +1,22 @@
-import { Text } from '@chakra-ui/react';
-import { FlexCardWrapper } from '../ui/CardWrapper';
 import { useLoggingIn } from '../../hooks/auth/useLoggingIn';
 
 export const GetLoggingInStateDemo = () => {
   const { isLoggingIn, error, isLoggedIn } = useLoggingIn();
 
   return (
-    <FlexCardWrapper alignItems="flex-start" justifyContent="flex-start">
-      <Text fontSize="xl" mb={2} fontWeight="black">
-        Logging in current state:
-      </Text>
-      <Text>
-        <Text as="span" display="inline-block" fontWeight="bold">
-          isLoggingIn:
-        </Text>{' '}
+    <div className="p-6 rounded-xl bg-dark-darker flex-1">
+      <p className="text-xl mb-2 font-black">Logging in current state:</p>
+      <p>
+        <span className="inline-block font-bold">isLoggingIn:</span>{' '}
         {isLoggingIn ? 'true' : 'false'}
-      </Text>
-      <Text>
-        <Text as="span" display="inline-block" fontWeight="bold">
-          error:
-        </Text>{' '}
-        {error || '-'}
-      </Text>
-      <Text>
-        <Text as="span" display="inline-block" fontWeight="bold">
-          isLoggedIn:
-        </Text>{' '}
+      </p>
+      <p>
+        <span className="inline-block font-bold">error:</span> {error || '-'}
+      </p>
+      <p>
+        <span className="inline-block font-bold">isLoggedIn:</span>{' '}
         {isLoggedIn ? 'true' : 'false'}
-      </Text>
-    </FlexCardWrapper>
+      </p>
+    </div>
   );
 };

@@ -1,7 +1,6 @@
 // Login component wraps all auth services in one place
 // You can always use only one of them if needed
 import { useCallback, memo, useState } from 'react';
-import { Box, Stack } from '@chakra-ui/react';
 import { useLogin } from '../../hooks/auth/useLogin';
 import { LoginMethodsEnum } from '../../types/enums';
 import { MobileLoginQR } from './MobileLoginQR';
@@ -33,11 +32,11 @@ export const LoginComponent = memo(() => {
     setLoginMethod(undefined);
   }, []);
 
-  if (error) return <Box textAlign="center">{error}</Box>;
+  if (error) return <div className="text-center">{error}</div>;
 
   return (
     <>
-      <Stack spacing={4} direction="column" align="center">
+      <div className="flex gap-4 flex-col items-center">
         {!isLoggedIn && (
           <>
             <ActionButton
@@ -63,11 +62,11 @@ export const LoginComponent = memo(() => {
             </ActionButton>
           </>
         )}
-      </Stack>
+      </div>
       {loginMethod === LoginMethodsEnum.walletconnect && walletConnectUri && (
-        <Box mt={5}>
+        <div className="mt-5">
           <MobileLoginQR walletConnectUri={walletConnectUri} />
-        </Box>
+        </div>
       )}
       {loginMethod === LoginMethodsEnum.ledger && (
         <LedgerAccountsList

@@ -1,7 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Flex, Box, Link, Spinner, Text } from '@chakra-ui/react';
 import { TransactionCb } from '../../hooks/core/common-helpers/sendTxOperations';
-import { FlexCardWrapper } from '../ui/CardWrapper';
 import { SimpleEGLDTxDemo } from './SimpleEGLDTxDemo';
 import { SimpleNftMintDemo } from './SimpleNftMintDemo';
 import { SimpleScQeryDemo } from './SimpleScQueryDemo';
@@ -66,92 +64,81 @@ export const SimpleDemo = () => {
   }, []);
 
   return (
-    <Box position="relative">
-      <Flex gap={8} flexWrap="wrap" justifyContent="center" mb={4}>
-        <SimpleEGLDTxDemo cb={handleTxCb} />
-        <SimpleNftMintDemo cb={handleTxCb} />
-        <SimpleScQeryDemo cb={handleQueryCb} />
-      </Flex>
-      {error && (
-        <FlexCardWrapper
-          position="absolute"
-          inset={0}
-          bg="blackAlpha.200"
-          backdropFilter="blur(10px)"
-        >
-          <Box fontSize="x-large" fontWeight="black">
-            Transaction status:
-          </Box>
-          <Box fontSize="lg">{error}</Box>
-          <ActionButton mt={4} onClick={handleClose}>
-            Close
-          </ActionButton>
-        </FlexCardWrapper>
-      )}
-      {pending && (
-        <FlexCardWrapper
-          position="absolute"
-          inset={0}
-          bg="blackAlpha.200"
-          backdropFilter="blur(10px)"
-        >
-          <Box fontSize="x-large" fontWeight="black">
-            Transaction is pending. Please wait.
-          </Box>
-          {loginMethod === LoginMethodsEnum.walletconnect && (
-            <Box>
-              Confirm it on the Maiar mobile app and wait till it finishes.
-            </Box>
-          )}
-          {loginMethod === LoginMethodsEnum.ledger && (
-            <Box>
-              Then wait some time to finish the transaction. You will get the
-              transaction hash and link at the end.
-            </Box>
-          )}
-          <Spinner mt={6} color="dappTemplate.color2.darker" />
-        </FlexCardWrapper>
-      )}
-      {result?.type && (
-        <FlexCardWrapper
-          position="absolute"
-          inset={0}
-          bg="blackAlpha.200"
-          backdropFilter="blur(10px)"
-        >
-          {result.type === 'tx' ? (
-            <>
-              <Box fontSize="x-large" fontWeight="black">
-                Transaction hash:
-              </Box>
-              <Link
-                fontSize="large"
-                textDecoration="underline"
-                href={`${networkConfig[chainType].explorerAddress}/transactions/${result.content}`}
-                isExternal
-              >
-                {shortenHash(result.content, 10)}
-              </Link>
-            </>
-          ) : (
-            <>
-              <Box fontSize="x-large" fontWeight="black">
-                Query result
-              </Box>
-              <Box fontSize="large">
-                There is{' '}
-                <Text fontWeight="black" fontSize="xl" display="inline-block">
-                  {result.content}
-                </Text>{' '}
-                NFTs to mint left!
-              </Box>
-            </>
-          )}
-          <ActionButton mt={4} onClick={handleClose}>
-            Close
-          </ActionButton>
-        </FlexCardWrapper>
-      )}
-    </Box>
+    <>
+      <div className="relative">
+        <div className="flex flex-wrap gap-8 justify-center mb-4">
+          <SimpleEGLDTxDemo cb={handleTxCb} />
+          <SimpleNftMintDemo cb={handleTxCb} />
+          <SimpleScQeryDemo cb={handleQueryCb} />
+        </div>
+        {error && (
+          <div className="absolute inset-0 bg-black/20 backdrop-blur-sm flex justify-center flex-col items-center gap-4">
+            <div className="text-xl font-black"> Transaction status:</div>
+            <div className="text-lg">{error}</div>
+
+            <div className="text-lg">{error}</div>
+            <ActionButton className="mt-4" onClick={handleClose}>
+              Close
+            </ActionButton>
+          </div>
+        )}
+        {pending && (
+          <div className="absolute inset-0 bg-black/20 backdrop-blur-sm flex justify-center flex-col items-center gap-4">
+            <div className="text-xl font-black">
+              Transaction is pending. Please wait.
+            </div>
+            {loginMethod === LoginMethodsEnum.walletconnect && (
+              <div>
+                Confirm it on the Maiar mobile app and wait till it finishes.
+              </div>
+            )}
+            {loginMethod === LoginMethodsEnum.ledger && (
+              <div>
+                Then wait some time to finish the transaction. You will get the
+                transaction hash and link at the end.
+              </div>
+            )}
+            <div
+              className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-color2-base rounded-full"
+              role="status"
+              aria-label="loading"
+            >
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+        )}
+        {result?.type && (
+          <div className="absolute inset-0 bg-black/20 backdrop-blur-sm flex justify-center flex-col items-center gap-4">
+            {result.type === 'tx' ? (
+              <>
+                <div className="text-xl font-black">Transaction hash:</div>
+                <a
+                  className="text-lg underline"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  href={`${networkConfig[chainType].explorerAddress}/transactions/${result.content}`}
+                >
+                  {shortenHash(result.content, 10)}
+                </a>
+              </>
+            ) : (
+              <>
+                <div className="text-xl font-black">Query result</div>
+                <div className="text-xl">
+                  There is{' '}
+                  <div className="font-black text-xl inline-block">
+                    {result.content}
+                  </div>{' '}
+                  NFTs to mint left!
+                </div>
+              </>
+            )}
+            <ActionButton className="mt-4" onClick={handleClose}>
+              Close
+            </ActionButton>
+          </div>
+        )}
+      </div>
+    </>
   );
 };

@@ -1,5 +1,4 @@
 import { FC, useCallback, useState, useEffect, useRef } from 'react';
-import { Box, Text, Flex, Spinner } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import { LoginMethodsEnum } from '../../types/enums';
@@ -7,6 +6,7 @@ import { ActionButton } from './ActionButton';
 import { shortenHash } from '../../utils/shortenHash';
 import { useLoginInfo } from '../../hooks/auth/useLoginInfo';
 import { errorParse } from '../../utils/errorParse';
+import clsx from 'clsx';
 
 interface LedgerAccountsListProps {
   getHWAccounts: (page?: number, pageSize?: number) => Promise<string[]>;
@@ -98,26 +98,27 @@ export const LedgerAccountsList: FC<LedgerAccountsListProps> = ({
 
   if (listPending) {
     return (
-      <Flex justify="center" align="center" marginTop={6} direction="column">
-        <Spinner color="elvenTools.color2.base" />
-        <Box marginTop={3}>Loading addresses, please wait...</Box>
-      </Flex>
+      <div className="flex justify-center align-center mt-6 flex-col">
+        <div
+          className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-color2-base rounded-full"
+          role="status"
+          aria-label="loading"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+        <div className="mt-3">Loading addresses, please wait...</div>
+      </div>
     );
   }
 
   if (error) {
     return (
-      <Box
-        textAlign="center"
-        marginLeft="auto"
-        marginRight="auto"
-        marginTop={6}
-      >
-        <Text>{error}</Text>
-        <ActionButton mt={4} onClick={handleRefresh}>
+      <div className="text-center mx-auto mt-6">
+        <p>{error}</p>
+        <ActionButton className="mt-4" onClick={handleRefresh}>
           Refresh
         </ActionButton>
-      </Box>
+      </div>
     );
   }
 
@@ -125,64 +126,60 @@ export const LedgerAccountsList: FC<LedgerAccountsListProps> = ({
 
   if (chosenAddress)
     return (
-      <Flex justify="center" align="center" marginTop={6} direction="column">
-        <Spinner color="elvenTools.color2.base" />
-        <Box marginTop={3}>Confirm on the Ledger device:</Box>
-        <Box marginTop={3} wordBreak="break-word" textAlign="center">
-          <Box fontWeight="bold">Address:</Box> {chosenAddress}
-        </Box>
+      <div className="flex justify-center items-center mt-6 flex-col">
+        <div
+          className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-color2-base rounded-full"
+          role="status"
+          aria-label="loading"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+        <div className="mt-3">Confirm on the Ledger device:</div>
+        <div className="mt-3 break-words text-center">
+          <div className="font-bold">Address:</div> {chosenAddress}
+        </div>
         {loginToken && (
-          <Box mt={3}>
-            <Box fontWeight="bold">Auth token:</Box> {loginToken}
+          <div className="mt-3">
+            <div className="font-bold">Auth token:</div> {loginToken}
             {'{}'}
-          </Box>
+          </div>
         )}
-      </Flex>
+      </div>
     );
 
   return (
-    <Box marginLeft="auto" marginRight="auto" marginTop={6}>
-      <Text fontWeight="semibold" textAlign="center" mb={2}>
-        Choose address:
-      </Text>
+    <div className="mx-auto mt-6">
+      <p className="font-semibold text-center mb-2">Choose address:</p>
       {accounts?.map((account: string, index: number) => (
-        <Box
+        <div
+          className="mb-0.5 cursor-pointer border border-transparent rounded-md hover:border-dotted hover:border-white hover:pl-2 transition-all p-1"
           key={account}
-          marginBottom={0.5}
-          cursor="pointer"
-          border="1px solid transparent"
-          borderRadius="md"
-          _hover={{ border: '1px dotted #fff', paddingLeft: 2 }}
-          transition="padding-left 0.2s"
-          padding={1}
           onClick={login(index, account)}
         >
-          <Box as="span" display="inline-block" textAlign="center" minWidth={4}>
+          <span className="inline-block text-center min-w-[4em]">
             {index + currentPage * ADDRESSES_PER_PAGE}
-          </Box>
+          </span>
           :
-          <Box
-            as="span"
-            display="inline-block"
-            marginLeft={4}
-            textAlign="center"
-          >
+          <span className="inline-block ml-4 text-center">
             {shortenHash(account, 11)}
-          </Box>
-        </Box>
+          </span>
+        </div>
       ))}
-      <Flex justifyContent="space-between" marginTop={6}>
-        <Text
+      <div className="flex justify-between mt-6">
+        <p
+          className={clsx(
+            currentPage === 0
+              ? 'cursor-not-allowed opacity-50'
+              : 'cursor-pointer opacity-100'
+          )}
           onClick={handlePrev}
-          cursor={currentPage === 0 ? 'not-allowed' : 'pointer'}
-          opacity={currentPage === 0 ? 0.5 : 1}
         >
           Prev
-        </Text>
-        <Text onClick={handleNext} cursor="pointer">
+        </p>
+        <p className="cursor-pointer" onClick={handleNext}>
           Next
-        </Text>
-      </Flex>
-    </Box>
+        </p>
+      </div>
+    </div>
   );
 };

@@ -1,11 +1,9 @@
-import { Link, Text } from '@chakra-ui/react';
 import { TransactionPayload } from '@elrondnetwork/erdjs';
 import { useTransaction } from '../../hooks/core/useTransaction';
 import { useCallback } from 'react';
 import { ActionButton } from '../tools/ActionButton';
 import { networkConfig, chainType } from '../../config/network';
 import { shortenHash } from '../../utils/shortenHash';
-import { FlexCardWrapper } from '../ui/CardWrapper';
 import { TransactionCb } from '../../hooks/core/common-helpers/sendTxOperations';
 
 const egldTransferAddress = process.env.NEXT_PUBLIC_EGLD_TRANSFER_ADDRESS || '';
@@ -29,21 +27,21 @@ export const SimpleEGLDTxDemo = ({
   }, [triggerTx]);
 
   return (
-    <FlexCardWrapper>
-      <Text mb={4}>
+    <div className="p-6 rounded-xl bg-dark-darker flex-1 flex flex-col text-center items-center justify-center">
+      <p className="mb-4">
         1. You will be sending 0.001 EGLD to the address: <br />
-        <Link
+        <a
           href={`${networkConfig[chainType].explorerAddress}/accounts/${egldTransferAddress}`}
-          fontWeight="bold"
+          className="font-bold"
         >
           {shortenHash(egldTransferAddress, 8)}
-        </Link>{' '}
+        </a>{' '}
         <br />
         (devnet)
-      </Text>
+      </p>
       <ActionButton disabled={pending} onClick={handleSendTx}>
-        <Text>Send Transaction</Text>
+        Send Transaction
       </ActionButton>
-    </FlexCardWrapper>
+    </div>
   );
 };

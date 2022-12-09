@@ -1,4 +1,3 @@
-import { Container, Box } from '@chakra-ui/react';
 import { FC, PropsWithChildren } from 'react';
 import { MetaHead, MetaHeadProps } from './MetaHead';
 import { Footer } from './Footer';
@@ -18,11 +17,11 @@ export const MainLayout: FC<PropsWithChildren<MetaHeadProps>> = ({
         metaImage={metaImage}
         metaUrl={metaUrl}
       />
-      <Box minHeight="calc(100vh - 120px)" pb="10">
-        <Container maxW="container.xl">
-          <Box>{children}</Box>
-        </Container>
-      </Box>
+      <div className="min-h-[calc(100vh-120px)] pb-4">
+        <div className="max-w-7xl px-4 mx-auto">
+          <div>{children}</div>
+        </div>
+      </div>
       <Footer />
     </>
   );

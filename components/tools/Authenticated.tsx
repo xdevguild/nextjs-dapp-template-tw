@@ -1,6 +1,6 @@
 import { FC, ReactElement, PropsWithChildren } from 'react';
-import { Spinner, Flex } from '@chakra-ui/react';
 import { useLoggingIn } from '../../hooks/auth/useLoggingIn';
+import clsx from 'clsx';
 
 interface AuthenticatedProps {
   fallback?: ReactElement;
@@ -18,15 +18,20 @@ export const Authenticated: FC<PropsWithChildren<AuthenticatedProps>> = ({
 
   if (isLoggingIn)
     return noSpinner ? null : (
-      <Flex justify={spinnerCentered ? 'center' : 'flex-start'}>
-        <Spinner
-          thickness="3px"
-          speed="0.4s"
-          color="elvenTools.color2.base"
-          size="md"
-          mt={3}
-        />
-      </Flex>
+      <div
+        className={clsx(
+          'flex',
+          spinnerCentered ? 'justify-center' : 'justify-start'
+        )}
+      >
+        <div
+          className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-color2-base rounded-full"
+          role="status"
+          aria-label="loading"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
     );
 
   if (!isLoggedIn) return fallback;

@@ -1,3 +1,5 @@
+import '../styles/globals.css';
+
 import '@fontsource/poppins/100.css';
 import '@fontsource/poppins/200.css';
 import '@fontsource/poppins/300.css';
@@ -9,17 +11,11 @@ import '@fontsource/poppins/800.css';
 import '@fontsource/poppins/900.css';
 
 import type { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
 import { useNetworkSync } from '../hooks/auth/useNetworkSync';
-import { theme } from '../config/chakraTheme';
 
 const NextJSDappTemplate = ({ Component, pageProps }: AppProps) => {
   useNetworkSync();
-  return (
-    <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
-    </ChakraProvider>
-  );
+  return <Component {...pageProps} />;
 };
 
 export default NextJSDappTemplate;

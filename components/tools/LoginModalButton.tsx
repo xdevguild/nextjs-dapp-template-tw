@@ -1,45 +1,19 @@
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  Text,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Spinner,
-  Flex,
-} from '@chakra-ui/react';
-import { FC } from 'react';
-import { ActionButton } from '../tools/ActionButton';
-import { LoginComponent } from '../tools/LoginComponent';
+import { FC, useState } from 'react';
+import { ActionButton } from './ActionButton';
+import { LoginComponent } from './LoginComponent';
 import { useEffectOnlyOnUpdate } from '../../hooks/tools/useEffectOnlyOnUpdate';
 import { useLogin } from '../../hooks/auth/useLogin';
 import { useLogout } from '../../hooks/auth/useLogout';
+import { Dialog } from '@headlessui/react';
 
-interface LoginModalButtonProps {
-  onClose?: () => void;
-  onOpen?: () => void;
-}
-
-const CustomModalOverlay = () => {
-  return <ModalOverlay bg="blackAlpha.700" backdropFilter="blur(5px)" />;
-};
-
-export const LoginModalButton: FC<LoginModalButtonProps> = ({
-  onClose,
-  onOpen,
-}) => {
+export const LoginModalButton: FC = () => {
+  const [open, setOpen] = useState(false);
   const { isLoggedIn, isLoggingIn } = useLogin();
   const { logout } = useLogout();
-  const {
-    isOpen: opened,
-    onOpen: open,
-    onClose: close,
-  } = useDisclosure({ onClose, onOpen });
 
   useEffectOnlyOnUpdate(() => {
     if (isLoggedIn) {
-      close();
+      setOpen(false);
     }
   }, [isLoggedIn]);
 
@@ -48,43 +22,33 @@ export const LoginModalButton: FC<LoginModalButtonProps> = ({
       {isLoggedIn ? (
         <ActionButton onClick={logout}>Disconnect</ActionButton>
       ) : (
-        <ActionButton onClick={open}>Connect</ActionButton>
+        <ActionButton onClick={() => setOpen(true)}>Connect</ActionButton>
       )}
-      <Modal isOpen={opened} size="sm" onClose={close} isCentered>
-        <CustomModalOverlay />
-        <ModalContent
-          bgColor="dappTemplate.dark.darker"
-          px={6}
-          pt={7}
-          pb={10}
-          position="relative"
-        >
-          <ModalCloseButton _focus={{ outline: 'none' }} />
-          <ModalBody>
-            <Text textAlign="center" mb={7} fontWeight="black" fontSize="2xl">
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <div
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm"
+          aria-hidden="true"
+        />
+        <div className="fixed inset-0 flex items-center justify-center p-4">
+          <Dialog.Panel className="relative bg-dark-darker p-6 max-w-sm w-full rounded-md">
+            <Dialog.Title className="text-center font-bold mb-4">
               Connect your wallet
-            </Text>
+            </Dialog.Title>
             {isLoggingIn && (
-              <Flex
-                alignItems="center"
-                backdropFilter="blur(3px)"
-                bgColor="blackAlpha.700"
-                justifyContent="center"
-                position="absolute"
-                inset={0}
-              >
-                <Spinner
-                  thickness="3px"
-                  speed="0.4s"
-                  color="dappTemplate.color2.base"
-                  size="xl"
-                />
-              </Flex>
+              <div className="flex backdrop-blur-sm bg-black/70 justify-center absolute inset-0">
+                <div
+                  className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-color2-base rounded-full"
+                  role="status"
+                  aria-label="loading"
+                >
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </div>
             )}
             <LoginComponent />
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+          </Dialog.Panel>
+        </div>
+      </Dialog>
     </>
   );
 };

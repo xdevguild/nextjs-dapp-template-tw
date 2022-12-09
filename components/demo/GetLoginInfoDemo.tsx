@@ -1,5 +1,3 @@
-import { Text, Tooltip } from '@chakra-ui/react';
-import { FlexCardWrapper } from '../ui/CardWrapper';
 import { useLoginInfo } from '../../hooks/auth/useLoginInfo';
 import { shortenHash } from '../../utils/shortenHash';
 
@@ -7,36 +5,23 @@ export const GetLoginInfoDemo = () => {
   const { loginMethod, expires, loginToken, signature } = useLoginInfo();
 
   return (
-    <FlexCardWrapper alignItems="flex-start" justifyContent="flex-start">
-      <Text fontSize="xl" mb={2} fontWeight="black">
-        Login info state:
-      </Text>
-      <Text>
-        <Text as="span" display="inline-block" fontWeight="bold">
-          loginMethod:
-        </Text>{' '}
+    <div className="p-6 rounded-xl bg-dark-darker flex-1">
+      <p className="text-xl mb-2 font-black">Login info state:</p>
+      <p>
+        <span className="inline-block font-bold">loginMethod:</span>{' '}
         {loginMethod}
-      </Text>
-      <Text>
-        <Text as="span" display="inline-block" fontWeight="bold">
-          expires:
-        </Text>{' '}
-        {expires}
-      </Text>
-      <Text>
-        <Text as="span" display="inline-block" fontWeight="bold">
-          loginToken:
-        </Text>{' '}
+      </p>
+      <p>
+        <span className="inline-block font-bold">expires:</span> {expires}
+      </p>
+      <p>
+        <span className="inline-block font-bold">loginToken:</span>{' '}
         {loginToken || '-'}
-      </Text>
-      <Tooltip label={signature}>
-        <Text>
-          <Text as="span" display="inline-block" fontWeight="bold">
-            signature:
-          </Text>{' '}
-          {signature ? shortenHash(signature, 8) : '-'}
-        </Text>
-      </Tooltip>
-    </FlexCardWrapper>
+      </p>
+      <p>
+        <span className="inline-block font-bold">signature:</span>{' '}
+        {signature ? shortenHash(signature, 8) : '-'}
+      </p>
+    </div>
   );
 };

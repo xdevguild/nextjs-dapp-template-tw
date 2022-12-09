@@ -1,10 +1,11 @@
-import { Box, BoxProps } from '@chakra-ui/react';
 import { FC, useCallback, PropsWithChildren } from 'react';
+import clsx from 'clsx';
 
-interface ActionButtonProps extends BoxProps {
+interface ActionButtonProps {
   onClick: () => void;
   isFullWidth?: boolean;
   disabled?: boolean;
+  className?: string;
 }
 
 export const ActionButton: FC<PropsWithChildren<ActionButtonProps>> = ({
@@ -12,6 +13,7 @@ export const ActionButton: FC<PropsWithChildren<ActionButtonProps>> = ({
   onClick,
   isFullWidth = false,
   disabled = false,
+  className,
   ...props
 }) => {
   const handleClick = useCallback(() => {
@@ -21,26 +23,19 @@ export const ActionButton: FC<PropsWithChildren<ActionButtonProps>> = ({
   }, [disabled, onClick]);
 
   return (
-    <Box
-      as="button"
-      borderColor="dappTemplate.color2.darker"
-      borderWidth={2}
-      bgColor="transparent"
-      py={2}
-      px={6}
-      rounded="xl"
-      fontWeight="normal"
-      cursor={disabled ? 'not-allowed' : 'pointer'}
-      color="dappTemplate.white"
-      userSelect="none"
-      _hover={!disabled ? { bg: 'dappTemplate.color2.darker' } : {}}
-      transition="background-color .3s"
-      width={isFullWidth ? '100%' : 'auto'}
+    <button
       onClick={handleClick}
-      opacity={!disabled ? 1 : 0.5}
+      className={clsx(
+        'border-2 border-color2-darker bg-transparent py-2 px-6 rounded-xl font-normal text-white select-none transition-colors',
+        disabled
+          ? 'cursor-not-allowed'
+          : 'cursor-pointer hover:bg-color2-darker transition-colors',
+        isFullWidth ? 'w-full' : 'w-auto',
+        className
+      )}
       {...props}
     >
       {children}
-    </Box>
+    </button>
   );
 };

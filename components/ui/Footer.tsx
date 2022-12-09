@@ -1,57 +1,35 @@
-import { Container, Box, Text, Stack } from '@chakra-ui/react';
 import packageJson from '../../package.json';
 
 export const Footer = () => {
   return (
-    <Box
-      height="120px"
-      bgColor="dappTemplate.dark.darker"
-      color="dappTemplate.white"
-      display="flex"
-      alignItems="center"
-    >
-      <Container
-        maxW="container.xl"
-        fontSize="sm"
-        fontWeight="normal"
-        textAlign="center"
-      >
-        <Box>MultiversX NextJS Dapp Template (v{`${packageJson.version}`})</Box>
-        <Box fontSize="xs" fontWeight="hairline">
+    <footer className="h-[120px] bg-dark-darker text-white flex items-center">
+      <div className="max-w-7xl mx-auto text-sm text-center">
+        <div>MultiversX NextJS Dapp Template (v{`${packageJson.version}`})</div>
+        <div className="text-xs font-extralight">
           All for free. Please support the project. Give it credit and tell the
           world about it. Attribution is not required but welcomed in the form
           of a backlink.
-        </Box>
-        <Stack
-          direction="row"
-          justifyContent="center"
-          fontSize="xs"
-          fontWeight="bold"
-        >
-          <Text
-            as="a"
-            color="dappTemplate.color3.base"
+        </div>
+        <div className="flex text-xs justify-center font-bold">
+          <a
+            className="text-color3-base"
             href="https://github.com/xdevguild"
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            {'xDevGuild'}
-          </Text>
-          <Text ml={2} mr={2}>
-            {' '}
-            |{' '}
-          </Text>
-          <Text
-            as="a"
-            color="dappTemplate.color3.base"
+            xDevGuild
+          </a>
+          <span className="mx-2"> | </span>
+          <a
+            className="text-color3-base"
             href="https://www.julian.io"
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            {'julian.io'}
-          </Text>
-        </Stack>
-      </Container>
-    </Box>
+            julian.io
+          </a>
+        </div>
+      </div>
+    </footer>
   );
 };

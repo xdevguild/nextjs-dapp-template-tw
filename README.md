@@ -14,7 +14,7 @@ It has straightforward and complete functionality.
 - it uses erdjs 11.* without the dapp-core library.
 it uses backed-side redirections to hide the API endpoint. The only exposed one is `/api/multiversx` and it is used only by the dapp internally
 - it uses the .env file - there is an example in the repo (for all configurations, also for the demo config)
-- it uses chakra-ui
+- it uses tailwind and headless ui
 
 ### How to start it locally:
 
@@ -49,9 +49,7 @@ import { useNetworkSync } from '../hooks/auth/useNetworkSync';
 const NextJSDappTemplate = ({ Component, pageProps }: AppProps) => {
   useNetworkSync();
   return (
-    <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <Component {...pageProps} />
   );
 };
 ```
@@ -89,16 +87,16 @@ It can display the spinner and also the fallback React element.
   spinnerCentered
   fallback={
     <>
-      <Text fontWeight="bold" fontSize="2xl" textAlign="center" mt={8}>
+      <p>
         Connect your wallet!
-      </Text>
-      <Flex mt={4} justifyContent="center">
+      </p>
+      <div>
         <LoginModalButton />
-      </Flex>
+      </div>
     </>
   }
 >
-  <Box>Do something here in the auth context...</Box>
+  <div>Do something here in the auth context...</div>
 </Authenticated>
 ```
 

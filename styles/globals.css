@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    linear-gradient(90deg, theme('colors.bgStripes') 0.1%, theme('colors.dark.base') 0.1%, theme('colors.dark.base') 50%, theme('colors.bgStripes') 50%, theme('colors.bgStripes') 50.1%, theme('colors.dark.base') 50.1%, theme('colors.dark.base') 100%);
+  background-size: 700px;
+  background-position-x: 150px;
+  color: theme('colors.white')
+}
+
+*::-webkit-scrollbar {
+  width: 1.5em;
+}
+*::-webkit-scrollbar-track {
+  background-color: theme('colors.dark.base');
+}
+
+
+*::-webkit-scrollbar-thumb {
+  background-color: theme('colors.light');
+  border-radius: 1.5em;
+}

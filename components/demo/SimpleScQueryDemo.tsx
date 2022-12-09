@@ -1,7 +1,5 @@
-import { Text, Link } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useScQuery, SCQueryType } from '../../hooks/core/useScQuery';
-import { FlexCardWrapper } from '../ui/CardWrapper';
 import { networkConfig, chainType } from '../../config/network';
 import { shortenHash } from '../../utils/shortenHash';
 import { ActionButton } from '../tools/ActionButton';
@@ -38,22 +36,22 @@ export const SimpleScQeryDemo = ({
   }, [cb, error, isLoading, isValidating, queryResult]);
 
   return (
-    <FlexCardWrapper>
-      <Text mb={4}>
+    <div className="p-6 rounded-xl bg-dark-darker flex-1 flex flex-col text-center items-center justify-center">
+      <p className="mb-4">
         3. You will be querying the smart contract for NFT tokens left to mint:{' '}
         <br />
-        <Link
+        <a
           href={`${networkConfig[chainType].explorerAddress}/accounts/${mintSmartContractAddress}`}
-          fontWeight="bold"
+          className="font-bold"
         >
           {shortenHash(mintSmartContractAddress, 8)}
-        </Link>{' '}
+        </a>{' '}
         <br />
         (devnet)
-      </Text>
+      </p>
       <ActionButton disabled={isLoading || isValidating} onClick={fetch}>
-        <Text>Query</Text>
+        Query
       </ActionButton>
-    </FlexCardWrapper>
+    </div>
   );
 };
