@@ -1,11 +1,13 @@
-### NextJS Dapp Template
+### NextJS Dapp Template (Tailwind version)
 
-- [multiversx-nextjs-dapp.netlify.com](https://multiversx-nextjs-dapp.netlify.com)
+- [multiversx-nextjs-dapp-tailwind.netlify.com](https://multiversx-nextjs-dapp-tailwind.netlify.app/)
+  
+This is a modified version of the NextJS Dapp Template that uses Chakra UI, which you can also find in xdevguild.
 
 Nextjs alternative to the [dapp-core](https://github.com/ElrondNetwork/dapp-core).
 Based on [Elven Tools Dapp](https://www.elven.tools/docs/minter-dapp-introduction.html), (It is developed simultaneously, and at some stages, it will have more core functionality)
 
-The Dapp is built using Nextjs and a couple of helpful tools.
+The Dapp is built using Nextjs, tailwind and a couple of helpful tools.
 It has straightforward and complete functionality.
 
 ### Main assumption for the dapp:
