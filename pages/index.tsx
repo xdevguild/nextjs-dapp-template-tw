@@ -20,7 +20,7 @@ const Home: NextPage = () => {
           Here is the demo of an MultiversX dapp for interactions with the
           blockchain and smart contracts. It provides four different ways of
           authentication and also a couple of React-based helpers/hooks. It is
-          based on NextJS and uses erdjs SDK. It also uses Chakra UI. Heavily
+          based on NextJS and uses multiversx SDK. It also uses tailwind. Heavily
           based on the{' '}
           <a
             className="underline"
@@ -103,7 +103,7 @@ const Home: NextPage = () => {
               The API access can be configured, masked, and limited only to the
               dapp.
             </li>
-            <li>And of course Chakra UI and NextJS framework</li>
+            <li>And of course tailwind and NextJS framework</li>
           </ul>
         </div>
         <div className=" p-6 rounded-xl bg-dark-darker">
