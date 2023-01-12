@@ -43,13 +43,13 @@ export const LoginComponent = memo(() => {
               isFullWidth
               onClick={handleLogin(LoginMethodsEnum.wallet)}
             >
-              Elrond Web Wallet
+              MultiversX Web Wallet
             </ActionButton>
             <ActionButton
               isFullWidth
               onClick={handleLogin(LoginMethodsEnum.extension)}
             >
-              Maiar Browser Extension
+              MultiversX Browser Extension
             </ActionButton>
             <ActionButton
               isFullWidth

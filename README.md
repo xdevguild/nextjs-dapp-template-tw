@@ -4,7 +4,7 @@
   
 This is a modified version of the NextJS Dapp Template that uses Chakra UI, which you can also find in xdevguild.
 
-Nextjs alternative to the [dapp-core](https://github.com/ElrondNetwork/dapp-core).
+Nextjs alternative to the [mx-sdk-dapp](https://github.com/multiversx/mx-sdk-dapp).
 Based on [Elven Tools Dapp](https://www.elven.tools/docs/minter-dapp-introduction.html), (It is developed simultaneously, and at some stages, it will have more core functionality)
 
 The Dapp is built using Nextjs, tailwind and a couple of helpful tools.
@@ -13,7 +13,7 @@ It has straightforward and complete functionality.
 ### Main assumption for the dapp:
 
 - it works on Nextjs
-- it uses erdjs 11.* without the dapp-core library.
+- it uses sdk-core 11.* without the mx-sdk-dapp library.
 it uses backed-side redirections to hide the API endpoint. The only exposed one is `/api/multiversx` and it is used only by the dapp internally
 - it uses the .env file - there is an example in the repo (for all configurations, also for the demo config)
 - it uses tailwind and headless ui
@@ -21,7 +21,7 @@ it uses backed-side redirections to hide the API endpoint. The only exposed one 
 ### How to start it locally:
 
 1. clone or download the repo
-2. `cd nextjs-dapp-template`
+2. `cd nextjs-dapp-template-tw`
 3. `npm install`
 4. configure .env.local (you can copy the contents of the .env.example) `cp .env.example .env.local`
 5. `npm run dev` -> for development
@@ -58,7 +58,7 @@ const NextJSDappTemplate = ({ Component, pageProps }: AppProps) => {
 
 #### LoginModalButton
 
-The component provides the `Connect` button with the modal, which will contain another three buttons for four different authentication possibilities (Maiar Mobile App, Maiar Defi Wallet - browser extension, Elrond Web Wallet). You should be able to use it in any place on the website.
+The component provides the `Connect` button with the modal, which will contain another three buttons for four different authentication possibilities (Maiar Mobile App, Maiar Defi Wallet - browser extension, MultiversX Web Wallet). You should be able to use it in any place on the website.
 
 ```jsx
 import { LoginModalButton } from '../tools/LoginModalButton';
@@ -154,7 +154,7 @@ const {
   payload: {
     scAddress: process.env.NEXT_PUBLIC_MINT_SMART_CONTRACT_ADDRESS,
     funcName: process.env.NEXT_PUBLIC_QUERY_FUNCTION_NAME,
-    args: [], // arguments for the query in hex format, you can use erdjs for that, for example: args: [ new Address('erd1....').hex() ] etc. It will be also simplified in the future.
+    args: [], // arguments for the query in hex format, you can use sdk-core for that, for example: args: [ new Address('erd1....').hex() ] etc. It will be also simplified in the future.
   },
   autoInit: false, // you can enable or disable the trigger of the query on the component mount
   abiJSON: yourImportedAbiJSONObject // required for SCQueryType.COMPLEX type
@@ -164,7 +164,7 @@ const {
 **Example** with `SCQueryType.COMPLEX`. This type uses `/vm-values/query`, ABI and ResultParser. The ABI JSON contents are required here. You can copy abi.json and import it in the same place you use useScQuery. Put the abi JSON file wherever you like in the codebase. I chose the `config` directory. See the example below:
 
 ```jsx
-import { TypedOutcomeBundle } from '@elrondnetwork/erdjs';
+import { TypedOutcomeBundle } from '@multiversx/sdk-core';
 import abiJSON from '../config/abi.json';
 
 const { data } = useScQuery<TypedOutcomeBundle>({
@@ -172,7 +172,7 @@ const { data } = useScQuery<TypedOutcomeBundle>({
   payload: {
     scAddress: 'erd1qqq...',
     funcName: 'yourScFunction',
-    args: [], // args in hex format, use erdjs for conversion, see above
+    args: [], // args in hex format, use sdk-core for conversion, see above
   },
   autoInit: true,
   abiJSON,
@@ -193,7 +193,7 @@ interface TypedOutcomeBundle {
 }
 ```
 
-You can then process the data. For example `data.firstValue.valueOf()` or `data.firstValue.toString()` if applicable. The returned type can be further processed using erdjs.
+You can then process the data. For example `data.firstValue.valueOf()` or `data.firstValue.toString()` if applicable. The returned type can be further processed using sdk-core.
 
 #### useLoggingIn()
 
@@ -269,7 +269,7 @@ NEXT_PUBLIC_MULTIVERSX_CHAIN = devnet
 # You have three options:
 #
 # 1. By commenting this out the dapp will use the default
-#    MultiversX api endpoint (e.g. https://devnet-api.elrond.com)
+#    MultiversX api endpoint (e.g. https://devnet-api.multiversx.com)
 #
 #    Note: MULTIVERSX_PRIVATE_API needs to be removed/commented out.
 #
@@ -296,7 +296,7 @@ NEXT_PUBLIC_DAPP_HOST = http://localhost:3000
 # This can be either a custom api endpoint or the default MultiversX api endpoint.
 # You will have to delete this or comment this out, if you don't wanna
 # mask / proxy your MultiversX api endpoint.
-MULTIVERSX_PRIVATE_API = https://devnet-api.elrond.com
+MULTIVERSX_PRIVATE_API = https://devnet-api.multiversx.com
 
 # Only this host will be allowed to consume the API (optional)
 # It will work only inside the Dapp, no one will be able to use the endpoint, even in browser

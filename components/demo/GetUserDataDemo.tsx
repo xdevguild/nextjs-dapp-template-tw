@@ -1,4 +1,4 @@
-import { TokenPayment } from '@elrondnetwork/erdjs';
+import { TokenPayment } from '@multiversx/sdk-core';
 import { shortenHash } from '../../utils/shortenHash';
 import { useAccount } from '../../hooks/auth/useAccount';
 import { networkConfig, chainType } from '../../config/network';
