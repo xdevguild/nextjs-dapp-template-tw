@@ -22,10 +22,10 @@ export const networkConfig: Record<string, NetworkType> = {
     walletConnectDeepLink:
       'https://maiar.page.link/?apn=com.elrond.maiar.wallet&isi=1519405832&ibi=com.elrond.maiar.wallet&link=https://maiar.com/',
     walletConnectBridgeAddresses: ['https://bridge.walletconnect.org'],
-    walletAddress: 'https://devnet-wallet.elrond.com',
+    walletAddress: 'https://devnet-wallet.multiversx.com',
     apiAddress:
-      process.env.NEXT_PUBLIC_MULTIVERSX_API || 'https://devnet-api.elrond.com',
-    explorerAddress: 'https://devnet-explorer.elrond.com',
+      process.env.NEXT_PUBLIC_MULTIVERSX_API || 'https://devnet-api.multiversx.com',
+    explorerAddress: 'https://devnet-explorer.multiversx.com',
     apiTimeout: '4000',
   },
 
@@ -40,11 +40,11 @@ export const networkConfig: Record<string, NetworkType> = {
     walletConnectDeepLink:
       'https://maiar.page.link/?apn=com.elrond.maiar.wallet&isi=1519405832&ibi=com.elrond.maiar.wallet&link=https://maiar.com/',
     walletConnectBridgeAddresses: ['https://bridge.walletconnect.org'],
-    walletAddress: 'https://testnet-wallet.elrond.com',
+    walletAddress: 'https://testnet-wallet.multiversx.com',
     apiAddress:
       process.env.NEXT_PUBLIC_MULTIVERSX_API ||
-      'https://testnet-api.elrond.com',
-    explorerAddress: 'https://testnet-explorer.elrond.com',
+      'https://testnet-api.multiversx.com',
+    explorerAddress: 'https://testnet-explorer.multiversx.com',
     apiTimeout: '4000',
   },
 
@@ -59,10 +59,10 @@ export const networkConfig: Record<string, NetworkType> = {
     walletConnectDeepLink:
       'https://maiar.page.link/?apn=com.elrond.maiar.wallet&isi=1519405832&ibi=com.elrond.maiar.wallet&link=https://maiar.com/',
     walletConnectBridgeAddresses: ['https://bridge.walletconnect.org'],
-    walletAddress: 'https://wallet.elrond.com',
+    walletAddress: 'https://wallet.multiversx.com',
     apiAddress:
-      process.env.NEXT_PUBLIC_MULTIVERSX_API || 'https://api.elrond.com',
-    explorerAddress: 'https://explorer.elrond.com',
+      process.env.NEXT_PUBLIC_MULTIVERSX_API || 'https://api.multiversx.com',
+    explorerAddress: 'https://explorer.multiversx.com',
     apiTimeout: '4000',
   },
 };
